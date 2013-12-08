@@ -27,7 +27,7 @@ Comment out the following modules from `python-for-android/dist/default/blacklis
 # - unittest
 ```
 ### 4. Download [django](https://github.com/django/django/tree/master/django)
-Place it into the `settings` folder of this project
+Place it into the `service` folder of this project
 
 ### 5. Build the app
 ```

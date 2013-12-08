@@ -1,0 +1,3 @@
+title=Djandro
+author=Baptiste Lagarde
+orientation=portrait

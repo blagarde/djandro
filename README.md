@@ -38,3 +38,8 @@ python-for-android/dist/default$ build.py --package com.example.djandro \
   --dir path/to/djandro debug installd
 ```
 `installd` will install if the phone is connected via USB. If you are using the VM and haven't configured USB, you can scp the .apk file to your local (non-virtual) machine or upload it somewhere and grab it from your phone, etc.
+
+## Connecting
+
+Open the phone's browser to
+`http://127.0.0.1:8000/myapp/`

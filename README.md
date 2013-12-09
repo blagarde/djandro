@@ -44,5 +44,7 @@ python-for-android/dist/default$ build.py --package com.example.djandro \
 1. Run the app. The first run can take a couple of minutes because python and the various media files have to get unpacked. Be patient.
 
 2. Open the phone's browser to:
+
 `http://localhost:8000/myapp/`
-The should also be available from other devices connected to the same network (replace `localhost` with the IP address of your device).
+
+The site should also be available from other devices connected to the same network (replace `localhost` with the IP address of your device).

@@ -39,7 +39,10 @@ python-for-android/dist/default$ build.py --package com.example.djandro \
 ```
 `installd` will install if the phone is connected via USB. If you are using the VM and haven't configured USB, you can scp the .apk file to your local (non-virtual) machine or upload it somewhere and grab it from your phone, etc.
 
-## Connecting
+## Connect
 
-Open the phone's browser to
-`http://127.0.0.1:8000/myapp/`
+1. Run the app. The first run can take a couple of minutes because python and the various media files have to get unpacked. Be patient.
+
+2. Open the phone's browser to:
+`http://localhost:8000/myapp/`
+The should also be available from other devices connected to the same network (replace `localhost` with the IP address of your device).

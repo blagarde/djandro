@@ -31,7 +31,7 @@ Place it into the `service` folder of this project
 
 ### 5. Build the app
 ```
-python-for-android/dist/default$ build.py --package com.example.djandro \
+python-for-android/dist/default$ ./build.py --package com.example.djandro \
   --name "Djandro" \
   --version 1 \
   --permission INTERNET \

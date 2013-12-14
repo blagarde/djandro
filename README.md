@@ -45,6 +45,6 @@ python-for-android/dist/default$ ./build.py --package com.example.djandro \
 
 2. Open the phone's browser to `http://localhost:8000/myapp/`.
 
-The site should also be available from other devices connected to the same network (replace `localhost` with the IP address of your device). When no networks are in range, your device can be used as a router while it serves Django:
+The site should also be available from other devices connected to the same network (replace `localhost` with the IP of your device). When no networks are in range, your device can be used as a router while it serves Django:
 
 Android Settings > More... > Tethering & portable hotspot > Portable Wi-Fi hotspot (check) 

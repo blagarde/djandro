@@ -10,26 +10,25 @@ class DjandroApp(App):
         self.service = AndroidService('Django', 'Django is running')
         self.running = False
         self.tmp = NamedTemporaryFile(mode='w+')
-        self.console = Thread(target=self.logging)
 
     def toggle(self):
         action = self.stop if self.running else self.start
-        action()
         self.running = not self.running
+        action()
         state = 'ON' if self.running else 'OFF'
         self.root.ids['btn'].text = "Django is " + state
 
     def start(self):
         self.service.start(self.tmp.name)
-        self.console.start()
+        console = Thread(target=self.logging)
+        console.start()
 
     def stop(self):
         self.service.stop()
-        self.console.stop()
 
     def logging(self):
         label = self.root.ids['console']
-        while True:
+        while self.running:
             self.tmp.seek(self.tmp.tell())
             text = self.tmp.read()
             if text != '':

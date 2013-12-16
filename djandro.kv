@@ -3,8 +3,18 @@
 BoxLayout:
     orientation: "vertical"
     Button:
-    	id: btn
+        size_hint_y: 0.1
+        id: btn
         text: "Start Django"
         on_press: app.toggle()
-    Label:
-        id: console
+    ScrollView:
+        size_hint: (1, 1)
+        pos_hint: {'x': 0, 'y': 0}
+        scroll_y:0
+        Label:
+            id: console
+            markup: True
+            text: '*Django start*\n'
+            text_size: self.width, None
+            size_hint_y: None
+            height: self.texture_size[1]

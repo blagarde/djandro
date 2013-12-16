@@ -1,0 +1,19 @@
+#:kivy 1.7
+
+BoxLayout:
+    orientation: "vertical"
+    Button:
+        size_hint_y: 0.1
+        id: btn
+        text: "Start Django"
+        on_press: app.toggle()
+    ScrollView:
+        size_hint: (1, 1)
+        pos_hint: {'x': 0, 'y': 0}
+        scroll_y:0
+        Label:
+            id: console
+            markup: True
+            text_size: self.width, None
+            size_hint_y: None
+            height: self.texture_size[1]

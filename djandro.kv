@@ -2,11 +2,17 @@
 
 BoxLayout:
     orientation: "vertical"
-    Button:
+    BoxLayout:
+        orientation: "horizontal"
         size_hint_y: 0.1
-        id: btn
-        text: "Start Django"
-        on_press: app.toggle()
+        Button:
+            id: btn
+            text: "Start Django"
+            on_press: app.toggle()
+        Label:
+            id: info
+            text: "[color=#ff0000]Django is OFF[/color]"
+            markup: True
     ScrollView:
         size_hint: (1, 1)
         pos_hint: {'x': 0, 'y': 0}

@@ -15,8 +15,12 @@ class DjandroApp(App):
         action = self.stop if self.running else self.start
         self.running = not self.running
         action()
-        state = 'ON' if self.running else 'OFF'
-        self.root.ids['btn'].text = "Django is " + state
+        self.root.ids['info'].text = "[color=#ff0000]Django is OFF[/color]"
+        if self.running:
+            self.root.ids['info'].text = "[color=#00ff00]Django is ON[/color]"
+
+        btn_text = 'Stop' if self.running else 'Start'
+        self.root.ids['btn'].text = btn_text + " Django"
 
     def start(self):
         self.service.start('')
@@ -35,12 +39,11 @@ class DjandroApp(App):
     def logger(self):
         label = self.root.ids['console']
         while self.logging:
-            timing_out = "[color=#ff0000]Waiting for server[/color]\n"
+            timing_out = "[color=#ff0000]Console is waiting for server to respond[/color]\n"
             try:
                 text = urllib2.urlopen('http://localhost:8000/logging/').read()
                 if label.text.endswith(timing_out):
                     label.text = label.text[:-len(timing_out)]
-                    label.text += "[color=#00ff00]Server Ready[/color]\n"
                 label.text += text
             except urllib2.URLError:
                 if not label.text.endswith(timing_out):

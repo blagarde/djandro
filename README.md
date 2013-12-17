@@ -5,6 +5,12 @@ Django on Android
 
 A friend of mine wanted to get an offline version of his django site that he could carry around on his phone, so I made this app. It basically starts django as a service that runs in the background, and you can connect to it using your phone's browser.
 
+
+<div align="center"><img src="docs/service.png" alt="Service" height="300px"/>
+<span> </span>
+<img src="docs/console.png" alt="Service" height="300px"/></div>
+
+
 ## Requirements
 - python-for-android
 - django

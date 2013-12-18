@@ -1,13 +1,18 @@
+import os
 from kivy.app import App
 from android import AndroidService
 from time import sleep
 from threading import Thread
-import urllib2
+
+
+HERE = os.path.abspath(os.path.dirname(__file__))
+LOGPATH = os.path.join(HERE, "djandro.log")
 
 
 class DjandroApp(App):
     def build(self):
         self.service = AndroidService('Django', 'Django is running')
+        open(LOGPATH, 'w').close()  # Touch the logfile
         self.running = False
         self.logging = False
         
@@ -23,7 +28,7 @@ class DjandroApp(App):
         self.root.ids['btn'].text = btn_text + " Django"
 
     def start(self):
-        self.service.start('')
+        self.service.start(LOGPATH)
         self.start_logging()
 
     def stop(self):
@@ -38,17 +43,12 @@ class DjandroApp(App):
 
     def logger(self):
         label = self.root.ids['console']
+        log = open(LOGPATH, 'r')
+        label.text = log.read()
         while self.logging:
-            timing_out = "[color=#ff0000]Console is waiting for server to respond[/color]\n"
-            try:
-                text = urllib2.urlopen('http://localhost:8000/logging/').read()
-                if label.text.endswith(timing_out):
-                    label.text = label.text[:-len(timing_out)]
-                label.text += text
-            except urllib2.URLError:
-                if not label.text.endswith(timing_out):
-                    label.text += timing_out
-            sleep(0.1)
+            log.seek(log.tell())
+            label.text += log.read()
+            sleep(0.2)
 
     def on_pause(self):
         if self.logging:

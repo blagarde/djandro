@@ -28,7 +28,6 @@ python-for-android$ ./distribute.sh -m "kivy sqlite3"
 ### 3. Include modules
 Comment out the following modules from `python-for-android/dist/default/blacklist.txt`:
 ```
-# - sqlite3 (2 lines to comment out)
 # - wsgiref
 # - unittest
 ```

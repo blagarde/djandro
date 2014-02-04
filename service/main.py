@@ -1,5 +1,5 @@
 import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "djandro.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
 from colors import add_markup
 from django.core.servers.basehttp import WSGIServer, WSGIRequestHandler, get_internal_wsgi_application
 
@@ -19,7 +19,6 @@ class RequestHandler(WSGIRequestHandler):
         with open(logpath, 'a') as fh:
             fh.write(kivymarkup + '\n')
             fh.flush()
-            print 'example.djandro - WROTE %s to %s' % (kivymarkup, logpath)
 
 server_address = ('0.0.0.0', 8000)
 wsgi_handler = get_internal_wsgi_application()

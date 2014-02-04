@@ -26,11 +26,13 @@ Create your Arm distribution of Python
 python-for-android$ ./distribute.sh -m "kivy sqlite3"
 ```
 ### 3. Include modules
-Comment out the following modules from `python-for-android/dist/default/blacklist.txt`:
+Comment out the following lines from `python-for-android/dist/default/blacklist.txt`:
 ```
-# - wsgiref
-# - unittest
+unittest/*
+(...)
+wsgiref/*
 ```
+
 ### 4. Download [django](https://github.com/django/django/tree/master/django)
 Place it into the `service` folder of this project
 
@@ -44,12 +46,39 @@ python-for-android/dist/default$ ./build.py --package com.example.djandro \
 ```
 `installd` will install if the phone is connected via USB. If you are using the VM and haven't configured USB, you can scp the .apk file to your local (non-virtual) machine or upload it somewhere and grab it from your phone, etc.
 
+At this stage, you have a working version of django on your Android.
+
 ## Connect
 
 1. Run the app. The first run can take a couple of minutes because python and the various media files have to get unpacked. Be patient.
 
-2. Open the phone's browser to `http://localhost:8000/myapp/`.
+2. **djandro** comes with a skeleton **django** app, called `myapp`. It simply displays your phone's current time. To try it, open the phone's browser to `http://localhost:8000/myapp/`. At this stage you might feel very excited, but don't call all your friends just yet. Using a browser as digital clock isn't exactly revolutionary, so they'll be much more impressed if you can show them your phone is running your own app.
 
-The site should also be available from other devices connected to the same network (replace `localhost` with the IP of your device). When no networks are in range, your device can be used as a router while it serves Django:
+3. Copy your own django app - called, say, `yourapp` - inside the `service` folder. It should be at the same level as `myapp`.
 
-Android Settings > More... > Tethering & portable hotspot > Portable Wi-Fi hotspot (check) 
+4. Update `service/urls.py`:
+```
+urlpatterns = patterns('',
+    # Examples:
+    # url(r'^$', 'djandro.views.home', name='home'),
+    url(r'^myapp/', include('myapp.urls')),
+    url(r'^yourapp/', include('yourapp.urls')),   # <-- Add this
+    url(r'^admin/', include(admin.site.urls)),
+)
+```
+5. Update `INSTALLED_APPS` in `service/settings.py`:
+```
+INSTALLED_APPS = (
+(...)
+    'myapp',
+    'yourapp',   # <-- Add this
+)
+```
+Note: `settings.py` can be altogether replaced with the one from your own django project, just remember that the database engine has to be sqlite3.
+
+
+## Connecting from other devices
+
+The site should also be available from other devices connected to the same network (replace `localhost` with the IP of the one running django). When no networks are in range, your device can be used as a router at the same time as it serves Django:
+
+Android Settings > More... > Tethering & portable hotspot > Portable Wi-Fi hotspot (check)

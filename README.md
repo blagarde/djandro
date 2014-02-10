@@ -23,20 +23,9 @@ A friend of mine wanted to get an offline version of his django site that he cou
 ### 2. Distribute
 Create your Arm distribution of Python
 ```
-python-for-android$ ./distribute.sh -m "kivy sqlite3"
+python-for-android$ ./distribute.sh -m "kivy django"
 ```
-### 3. Include modules
-Comment out the following lines from `python-for-android/dist/default/blacklist.txt`:
-```
-unittest/*
-(...)
-wsgiref/*
-```
-
-### 4. Download [django](https://github.com/django/django/tree/master/django)
-Place it into the `service` folder of this project
-
-### 5. Build the app
+### 3. Build the app
 ```
 python-for-android/dist/default$ ./build.py --package com.example.djandro \
   --name "Djandro" \
@@ -56,7 +45,9 @@ At this stage, you have a working version of django on your Android.
 
 3. Copy your own django app - called, say, `yourapp` - inside the `service` folder. It should be at the same level as `myapp`.
 
-4. Update `service/urls.py`:
+4. Update django config files:
+
+- `service/urls.py`
 ```
 urlpatterns = patterns('',
     # Examples:
@@ -66,7 +57,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 )
 ```
-5. Update `INSTALLED_APPS` in `service/settings.py`:
+- `service/settings.py`:
 ```
 INSTALLED_APPS = (
 (...)

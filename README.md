@@ -10,7 +10,6 @@ A friend of mine wanted to get an offline version of his django site that he cou
 <span> </span>
 <img src="docs/console.png" alt="Service" height="300px"/></div>
 
-
 ## Requirements
 - python-for-android
 - django
@@ -25,6 +24,10 @@ Create your Arm distribution of Python
 ```
 python-for-android$ ./distribute.sh -m "kivy django"
 ```
+- The above command relies on python-for-android's [recipes/django/recipe.sh](https://github.com/kivy/python-for-android/blob/master/recipes/django/recipe.sh). If it does not exist in your local repository, run `git pull` in the python-for-android folder to update it.
+- The django recipe fetches and installs django 1.6.1. If your app requires a different version, look up the version and md5 on [PyPI](https://pypi.python.org/pypi/Django) and update them in the recipe.
+- This recipe includes `wsgiref`, `unittest`, and `sqlite3` as the database engine.
+
 ### 3. Build the app
 ```
 python-for-android/dist/default$ ./build.py --package com.example.djandro \
